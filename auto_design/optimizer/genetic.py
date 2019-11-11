@@ -32,17 +32,20 @@ def eval_fit(individual, data):
     configs_encoder = individual[0:2]
     configs_model = individual[2:]
     # build models
-    encoder = build_encoder(x_train, x_model_val, configs_encoder)
-    if(encoder!=None):
-        x_train = encoder.predict(x_train)
-        x_model_val = encoder.predict(x_model_val)
-        x_optimizer_val = encoder.predict(x_optimizer_val)
-    model = build_model(x_train, y_train, 
-                        x_model_val, y_model_val, 
-                        configs_model, problem_type)
-    # evaluate fitness
-    fitness = model.evaluate(x_optimizer_val, y_optimizer_val)
-    return fitness,
+    try:
+        encoder = build_encoder(x_train, x_model_val, configs_encoder)
+        if(encoder!=None):
+            x_train = encoder.predict(x_train)
+            x_model_val = encoder.predict(x_model_val)
+            x_optimizer_val = encoder.predict(x_optimizer_val)
+        model = build_model(x_train, y_train, 
+                            x_model_val, y_model_val, 
+                            configs_model, problem_type)
+        # evaluate fitness
+        fitness = model.evaluate(x_optimizer_val, y_optimizer_val)
+        return fitness,
+    except:
+        return np.nan,
 
 def optimize(fx, data, size_population, number_generations):
     '''function to optimize a given target function and return best possible solution

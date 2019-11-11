@@ -24,11 +24,11 @@ def build_encoder(x_train, x_model_val, configs):
     if(use_encoder):
         # build the network
         input_layer = Input(shape=(int(x_train.shape[1]),))
-        encoded = Dense(int(x_train.shape[1]*factor), activation='relu')(input_layer)
-        encoded = Dense(int(x_train.shape[1]*factor**2), activation='relu')(encoded)
-        encoded = Dense(int(x_train.shape[1]*factor**3), activation='relu')(encoded)
-        decoded = Dense(int(x_train.shape[1]*factor**2), activation='relu')(encoded)
-        decoded = Dense(int(x_train.shape[1]*factor), activation='relu')(decoded)
+        encoded = Dense(max(int(x_train.shape[1]*factor), 1), activation='relu')(input_layer)
+        encoded = Dense(max(int(x_train.shape[1]*factor**2), 1), activation='relu')(encoded)
+        encoded = Dense(max(int(x_train.shape[1]*factor**3), 1), activation='relu')(encoded)
+        decoded = Dense(max(int(x_train.shape[1]*factor**2), 1), activation='relu')(encoded)
+        decoded = Dense(max(int(x_train.shape[1]*factor), 1), activation='relu')(decoded)
         decoded = Dense(int(x_train.shape[1]), activation='linear')(decoded)
         autoencoder = Model(input_layer, decoded)
         encoder = Model(input_layer, encoded)

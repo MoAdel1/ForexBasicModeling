@@ -25,6 +25,7 @@ def design(x, y, problem_type, size_population=15, number_generations=10):
     -------
     pipeline : dict
         a python dictionary containing the scaler, encoder and model
+    log : dict
     '''
     # standardize data and return scaler
     x, scaler = standardize(x)
