@@ -1,6 +1,6 @@
 # ForexbasicModel
 
-## What is it for
+## What it is for
 This repo is to build and test a feed forward net on Forex data for the following reasons
 
 - benchmark performance of **optimal** feed forward nets using Autodesigner.
